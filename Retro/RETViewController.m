@@ -136,7 +136,7 @@
 		[RETFieldDivider divider],
 		
 		// Make it taller
-		[RETFieldPlainText fieldWithName:@"Comments" placeholder:@"Anything unusual"]
+		[RETFieldPlainText fieldWithName:@"Comments" placeholder:@"Anything unusual to report"]
 	];
 	
 	

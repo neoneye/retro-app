@@ -43,7 +43,7 @@
 -(void)layoutSubviews {
 	[super layoutSubviews];
 	
-	CGFloat width = 250;
+	CGFloat width = 400;
 	
 	CGRect r = self.bounds;
 	CGRect slice, remainder;
@@ -62,6 +62,7 @@
 		label.text = @"label";
 		label.textColor = [UIColor blackColor];
 		label.textAlignment = NSTextAlignmentRight;
+		[label setFont:[UIFont systemFontOfSize:30]];
 		_label = label;
 	}
 	return _label;
@@ -101,6 +102,8 @@
 	self.label.text = field.label;
 	self.textField.placeholder = field.placeholder;
 	self.textField.keyboardType = UIKeyboardTypeDefault;
+	self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
+	self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 }
 
 -(void)visitAmount:(RETFieldAmount*)field {

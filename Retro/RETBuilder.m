@@ -40,7 +40,7 @@
 
 -(void)visitDivider:(RETFieldDivider*)field {
 	UIView *view = [UIView new];
-	view.backgroundColor = [UIColor colorWithWhite:0.8 alpha:1.0];
+	view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.1];
 	[self.resultViews addObject:view];
 }
 
