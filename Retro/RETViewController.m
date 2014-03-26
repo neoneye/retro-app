@@ -176,18 +176,24 @@
 	}
 
 	//NSLog(@"result: %@", submitter.prettyString);
+	NSString *htmlTable = submitter.prettyString;
 	
-	NSData *data = [submitter.prettyString dataUsingEncoding:NSUTF8StringEncoding];
-	[self presentResult:data message:submitter.prettyString];
+	NSString *dateString = [NSString stringWithFormat:@"%@", [NSDate new]];
+	NSMutableString *s = [NSMutableString new];
+	[s appendFormat:@"<h1>%@</h1>\n", dateString];
+	[s appendString:htmlTable];
+	NSData *data = [s dataUsingEncoding:NSUTF8StringEncoding];
+	
+	[self presentResult:data message:htmlTable dateString:dateString];
 }
 
--(void)presentResult:(NSData*)resultData message:(NSString*)messageBody {
+-(void)presentResult:(NSData*)resultData message:(NSString*)messageBody dateString:(NSString*)dateString {
 	NSParameterAssert(resultData);
 	
 	NSData *attachment0Data = resultData;
 	NSString *attachment0MIME = @"text/html";
 	NSString *attachment0FileName = @"TodaysReport.html";
-	NSString *subject = [NSString stringWithFormat:@"RETRO REPORT %@", [NSDate new]];
+	NSString *subject = [NSString stringWithFormat:@"RETRO REPORT %@", dateString];
 	MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
 	[mailer setToRecipients:@[@"bestyrer@retro-norrebro.dk"]];
 	mailer.bk_completionBlock = ^(MFMailComposeViewController *vc, MFMailComposeResult result, NSError *error) {
