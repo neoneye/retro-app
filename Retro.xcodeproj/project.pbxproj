@@ -47,6 +47,7 @@
 		4216890618E350C8001A98D4 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
 		4216890718E350C8001A98D4 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
 		4216890818E350C8001A98D4 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
+		4216890A18E36419001A98D4 /* RETResetFieldProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RETResetFieldProtocol.h; sourceTree = "<group>"; };
 		424110AF18D0E9580079CB4C /* RETFieldLayouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RETFieldLayouter.h; sourceTree = "<group>"; };
 		424110B018D0E9580079CB4C /* RETFieldLayouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RETFieldLayouter.m; sourceTree = "<group>"; };
 		4288869A18DA377500EF38F9 /* RETTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RETTextField.h; sourceTree = "<group>"; };
@@ -182,6 +183,7 @@
 				424110B018D0E9580079CB4C /* RETFieldLayouter.m */,
 				4288869A18DA377500EF38F9 /* RETTextField.h */,
 				4288869B18DA377500EF38F9 /* RETTextField.m */,
+				4216890A18E36419001A98D4 /* RETResetFieldProtocol.h */,
 			);
 			path = Retro;
 			sourceTree = "<group>";

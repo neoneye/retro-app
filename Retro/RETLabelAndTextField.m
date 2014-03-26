@@ -113,4 +113,8 @@
 	// do nothing
 }
 
+-(void)ret_resetField {
+	self.textField.text = nil;
+}
+
 @end

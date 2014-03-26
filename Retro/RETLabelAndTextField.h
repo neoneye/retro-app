@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "RETField.h"
+#import "RETResetFieldProtocol.h"
 
-@interface RETLabelAndTextField : UIView
+@interface RETLabelAndTextField : UIView <RETResetFieldProtocol>
 
 @property (nonatomic, strong) RETField *field;
 

@@ -15,6 +15,8 @@
 #import "TPKeyboardAvoidingScrollView.h"
 #import "UIBarButtonItem+BlocksKit.h"
 #import <BlocksKit/MFMailComposeViewController+BlocksKit.h>
+#import <BlocksKit/UIAlertView+BlocksKit.h>
+#import "RETResetFieldProtocol.h"
 
 @interface RETViewController ()
 @property (nonatomic, strong) UIScrollView *scrollView;
@@ -30,32 +32,46 @@
 	self.view = [UIView new];
 	[self.view addSubview:self.scrollView];
 	
+	[self buildAndInstall];
+	[self installNavigationBar];
+}
+
+-(void)buildAndInstall {
 	RETBuilder *builder = [RETBuilder new];
 	for (RETField *field in self.fields) {
 		[field accept:builder];
 	}
 	
 	self.builder = builder;
-
+	
 	for (UIView *view in builder.views) {
 		if (![view isKindOfClass:[UIView class]]) {
 			continue;
 		}
 		[self.scrollView addSubview:view];
 	}
-	
-	[self installNavigationBar];
 }
 
 -(void)installNavigationBar {
 	__weak RETViewController *weakSelf = self;
-	NSString *title = @"Submit";
-	UIBarButtonItem *item = [[UIBarButtonItem alloc] bk_initWithTitle:title
-																style:UIBarButtonItemStyleBordered
-															  handler:^(id sender) {
-																  [weakSelf submitButtonAction];
-															  }];
-	[self.navigationItem setRightBarButtonItem:item];
+	{
+		NSString *title = @"Reset";
+		UIBarButtonItem *item = [[UIBarButtonItem alloc] bk_initWithTitle:title
+																	style:UIBarButtonItemStyleBordered
+																  handler:^(id sender) {
+																	  [weakSelf resetButtonAction];
+																  }];
+		[self.navigationItem setLeftBarButtonItem:item];
+	}
+	{
+		NSString *title = @"Submit";
+		UIBarButtonItem *item = [[UIBarButtonItem alloc] bk_initWithTitle:title
+																	style:UIBarButtonItemStyleBordered
+																  handler:^(id sender) {
+																	  [weakSelf submitButtonAction];
+																  }];
+		[self.navigationItem setRightBarButtonItem:item];
+	}
 }
 
 - (void)viewDidLayoutSubviews {
@@ -127,15 +143,39 @@
 	// Gem screenshot til kamerarulle
 }
 
--(void)submitButtonAction {
-	NSLog(@"click");
+-(void)resetButtonAction {
+	__weak RETViewController *weakSelf = self;
+	[UIAlertView bk_showAlertViewWithTitle:@"Reset"
+								   message:@"Are you sure you want to clear all the text fields in this form?"
+						 cancelButtonTitle:@"Cancel"
+						 otherButtonTitles:@[@"Reset"]
+								   handler:^(UIAlertView *alertView, NSInteger buttonIndex){
+							 if (buttonIndex == 1) {
+								 [weakSelf resetTextFields];
+							 }
+						 }];
+}
 
+-(void)resetTextFields {
+	if (!self.builder) {
+		return;
+	}
+	
+	for (UIView *view in self.builder.views) {
+		if ([view conformsToProtocol:@protocol(RETResetFieldProtocol)]) {
+			NSObject <RETResetFieldProtocol> *thing = (NSObject <RETResetFieldProtocol> *)view;
+			[thing ret_resetField];
+		}
+	}
+}
+
+-(void)submitButtonAction {
 	RETSubmitter *submitter = [RETSubmitter new];
 	for (RETField *field in self.fields) {
 		[field accept:submitter];
 	}
 
-	NSLog(@"result: %@", submitter.prettyString);
+	//NSLog(@"result: %@", submitter.prettyString);
 	
 	NSData *data = [submitter.prettyString dataUsingEncoding:NSUTF8StringEncoding];
 	[self presentResult:data message:submitter.prettyString];
