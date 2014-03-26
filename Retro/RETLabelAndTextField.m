@@ -14,6 +14,8 @@
 @property (nonatomic, strong) UILabel *label;
 @property (nonatomic, strong) UITextField *textField;
 
+@property (nonatomic) BOOL restrictToMax8Digits;
+
 @end
 
 
@@ -104,12 +106,14 @@
 	self.textField.keyboardType = UIKeyboardTypeDefault;
 	self.textField.autocorrectionType = UITextAutocorrectionTypeNo;
 	self.textField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+	self.restrictToMax8Digits = NO;
 }
 
 -(void)visitAmount:(RETFieldAmount*)field {
 	self.label.text = field.label;
 	self.textField.placeholder = field.placeholder;
 	self.textField.keyboardType = UIKeyboardTypeDecimalPad;
+	self.restrictToMax8Digits = YES;
 }
 
 -(void)visitDivider:(RETFieldDivider*)field {
@@ -118,6 +122,20 @@
 
 -(void)ret_resetField {
 	self.textField.text = nil;
+}
+
+#define NUMBERS_ONLY @"1234567890"
+#define CHARACTER_LIMIT 8
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string  {
+	if (self.restrictToMax8Digits) {
+		NSUInteger newLength = [textField.text length] + [string length] - range.length;
+		NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:NUMBERS_ONLY] invertedSet];
+		NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+		return (([string isEqualToString:filtered])&&(newLength <= CHARACTER_LIMIT));
+	}
+	
+	return YES;
 }
 
 @end
