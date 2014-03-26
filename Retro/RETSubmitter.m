@@ -34,7 +34,7 @@
 	if (value) {
 		[s appendFormat:@"<td><b>%@</b></td>", [value gtm_stringByEscapingForHTML]];
 	} else {
-		[s appendString:@"<td style='color:#777'>Empty</td>"];
+		[s appendString:@"<td style='color:#aaa'>empty</td>"];
 	}
 	
 	[self.result addObject:s.copy];
