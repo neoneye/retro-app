@@ -170,6 +170,8 @@
 }
 
 -(void)submitButtonAction {
+	[self.view endEditing:NO];
+	
 	RETSubmitter *submitter = [RETSubmitter new];
 	for (RETField *field in self.fields) {
 		[field accept:submitter];
