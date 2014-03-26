@@ -117,6 +117,7 @@
 		[RETFieldAmount fieldWithName:@"Closing balance Dankort" placeholder:@"Credit card balance"],
 		[RETFieldPlainText fieldWithName:@"Closing byttepenge ok" placeholder:@"Check the black box. Type YES if 900 kr is present."],
 		[RETFieldAmount fieldWithName:@"Transfer to bank" placeholder:@"Amount you have placed in the safe"],
+		[RETFieldDivider divider],
 		
 		// Make it taller
 		[RETFieldPlainText fieldWithName:@"Comments" placeholder:@"Anything unusual"]
@@ -144,8 +145,8 @@
 	NSParameterAssert(resultData);
 	
 	NSData *attachment0Data = resultData;
-	NSString *attachment0MIME = @"application/text";
-	NSString *attachment0FileName = @"TodaysReport.txt";
+	NSString *attachment0MIME = @"text/html";
+	NSString *attachment0FileName = @"TodaysReport.html";
 	NSString *subject = [NSString stringWithFormat:@"RETRO REPORT %@", [NSDate new]];
 	MFMailComposeViewController *mailer = [[MFMailComposeViewController alloc] init];
 	[mailer setToRecipients:@[@"bestyrer@retro-norrebro.dk"]];
@@ -168,7 +169,7 @@
 		}
 	};
 	[mailer setSubject:subject];
-	[mailer setMessageBody:messageBody isHTML:NO];
+	[mailer setMessageBody:messageBody isHTML:YES];
 	[mailer addAttachmentData:attachment0Data mimeType:attachment0MIME fileName:attachment0FileName];
 	[self presentViewController:mailer animated:YES completion:NULL];
 }

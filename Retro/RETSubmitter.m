@@ -25,22 +25,48 @@
     return self;
 }
 
+-(void)appendLabel:(NSString*)label value:(NSString*)value {
+	NSMutableString *s = [NSMutableString new];
+	[s appendFormat:@"<td align='right'>%@:</td>", label];
+	[s appendString:@"<td> </td>"];
+	
+	if (value) {
+		[s appendFormat:@"<td><b>%@</b></td>", value];
+	} else {
+		[s appendString:@"<td style='color:#777'>Empty</td>"];
+	}
+	
+	[self.result addObject:s.copy];
+}
+
 -(void)visitPlainText:(RETFieldPlainText*)field {
-	NSString *s = [NSString stringWithFormat:@"plain text: %@", field.textFieldValue];
-	[self.result addObject:s];
+	NSString *s = nil;
+	if (field.textFieldValue) {
+		s = [NSString stringWithFormat:@"%@", field.textFieldValue];
+	}
+	[self appendLabel:field.label value:s];
 }
 
 -(void)visitAmount:(RETFieldAmount*)field {
-	NSString *s = [NSString stringWithFormat:@"amount: %@", field.textFieldValue];
-	[self.result addObject:s];
+	NSString *s = nil;
+	if (field.textFieldValue) {
+		s = [NSString stringWithFormat:@"%@", field.textFieldValue];
+	}
+	[self appendLabel:field.label value:s];
 }
 
 -(void)visitDivider:(RETFieldDivider*)field {
-	// do nothing
+	NSString *s = @"<td colspan='3'><hr/></td>";
+	[self.result addObject:s];
 }
 
 -(NSString*)prettyString {
-	return [self.result componentsJoinedByString:@"\n"];
+	NSMutableString *s = [NSMutableString new];
+	[s appendString:@"<table>"];
+	NSString *rows = [self.result componentsJoinedByString:@"</tr><tr>"];
+	[s appendFormat:@"<tr>%@</tr>", rows];
+	[s appendString:@"</table>"];
+	return s.copy;
 }
 
 @end
