@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4216890918E350C8001A98D4 /* GTMNSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 4216890818E350C8001A98D4 /* GTMNSString+HTML.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		424110B118D0E9580079CB4C /* RETFieldLayouter.m in Sources */ = {isa = PBXBuildFile; fileRef = 424110B018D0E9580079CB4C /* RETFieldLayouter.m */; };
 		4288869C18DA377500EF38F9 /* RETTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 4288869B18DA377500EF38F9 /* RETTextField.m */; };
 		42A1678F18C7BBCF00D21801 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42A1678E18C7BBCF00D21801 /* Foundation.framework */; };
@@ -43,6 +44,9 @@
 
 /* Begin PBXFileReference section */
 		16386A11AA054B808E6D12BF /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		4216890618E350C8001A98D4 /* GTMDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTMDefines.h; sourceTree = "<group>"; };
+		4216890718E350C8001A98D4 /* GTMNSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GTMNSString+HTML.h"; sourceTree = "<group>"; };
+		4216890818E350C8001A98D4 /* GTMNSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GTMNSString+HTML.m"; sourceTree = "<group>"; };
 		424110AF18D0E9580079CB4C /* RETFieldLayouter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RETFieldLayouter.h; sourceTree = "<group>"; };
 		424110B018D0E9580079CB4C /* RETFieldLayouter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RETFieldLayouter.m; sourceTree = "<group>"; };
 		4288869A18DA377500EF38F9 /* RETTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RETTextField.h; sourceTree = "<group>"; };
@@ -104,9 +108,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4216890418E350C8001A98D4 /* Extern */ = {
+			isa = PBXGroup;
+			children = (
+				4216890518E350C8001A98D4 /* google-toolbox-for-mac */,
+			);
+			path = Extern;
+			sourceTree = "<group>";
+		};
+		4216890518E350C8001A98D4 /* google-toolbox-for-mac */ = {
+			isa = PBXGroup;
+			children = (
+				4216890618E350C8001A98D4 /* GTMDefines.h */,
+				4216890718E350C8001A98D4 /* GTMNSString+HTML.h */,
+				4216890818E350C8001A98D4 /* GTMNSString+HTML.m */,
+			);
+			path = "google-toolbox-for-mac";
+			sourceTree = "<group>";
+		};
 		42A1678218C7BBCF00D21801 = {
 			isa = PBXGroup;
 			children = (
+				4216890418E350C8001A98D4 /* Extern */,
 				42A1679418C7BBCF00D21801 /* Retro */,
 				42A167B318C7BBCF00D21801 /* RetroTests */,
 				42A1678D18C7BBCF00D21801 /* Frameworks */,
@@ -332,6 +355,7 @@
 				42A167CE18C7C81900D21801 /* RETSubmitter.m in Sources */,
 				42A167C818C7C1E400D21801 /* RETLabelAndTextField.m in Sources */,
 				42A1679F18C7BBCF00D21801 /* RETAppDelegate.m in Sources */,
+				4216890918E350C8001A98D4 /* GTMNSString+HTML.m in Sources */,
 				42A167A518C7BBCF00D21801 /* RETViewController.m in Sources */,
 				42A1679B18C7BBCF00D21801 /* main.m in Sources */,
 			);

@@ -7,6 +7,7 @@
 //
 
 #import "RETSubmitter.h"
+#import "GTMNSString+HTML.h"
 
 @interface RETSubmitter ()
 
@@ -27,11 +28,11 @@
 
 -(void)appendLabel:(NSString*)label value:(NSString*)value {
 	NSMutableString *s = [NSMutableString new];
-	[s appendFormat:@"<td align='right'>%@:</td>", label];
+	[s appendFormat:@"<td align='right'>%@:</td>", [label gtm_stringByEscapingForHTML]];
 	[s appendString:@"<td> </td>"];
 	
 	if (value) {
-		[s appendFormat:@"<td><b>%@</b></td>", value];
+		[s appendFormat:@"<td><b>%@</b></td>", [value gtm_stringByEscapingForHTML]];
 	} else {
 		[s appendString:@"<td style='color:#777'>Empty</td>"];
 	}
